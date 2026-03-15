@@ -18,7 +18,7 @@ const Login = () => {
 
     const handleLogin = (e) => {
         e.preventDefault() 
-        axios.post("http://localhost:3000/create/Login", {
+        axios.post("https://schoolmanagement-backend-6qtd.onrender.com/create/Login", {
             "Email": Email,
             "password": password
         }).then((res) => {

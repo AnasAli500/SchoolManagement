@@ -13,7 +13,7 @@ const Register = () => {
 
     const handleRegister = (e) => {
         e.preventDefault() 
-        axios.post("http://localhost:3000/create/Register",{
+        axios.post("https://schoolmanagement-backend-6qtd.onrender.com/create/Register",{
             "Name":Name,
             "Adress":Adress,
             "Email":Email,
