@@ -87,14 +87,14 @@ const Login = () => {
                         Sign In
                     </button>
 
-                    <div className="text-center mt-4">
+                    {/* <div className="text-center mt-4">
                         <p className="text-sm text-gray-400">
                             Don't have an account?{' '}
                             <Link to="/Register" className="text-[#00bcd4] hover:text-[#0097a7] font-medium transition duration-200">
                                 Sign Up
                             </Link>
                         </p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>
