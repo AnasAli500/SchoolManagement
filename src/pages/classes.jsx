@@ -18,7 +18,7 @@ const Class = () => {
 
   // Read all classes
   const handleRaedData = () => {
-    axios.get("http://localhost:3000/read/class").then((res) => {
+    axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/class").then((res) => {
       setData(res.data);
     }).catch(error => console.log(error));
   };
@@ -53,7 +53,7 @@ const Class = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (editId) {
-      axios.put(`http://localhost:3000/update/class/${editId}`, formData)
+      axios.put(`https://schoolmanagement-backend-6qtd.onrender.com/update/class/${editId}`, formData)
         .then(() => {
           setShowSuccess({ type: 'update' });
           setTimeout(() => setShowSuccess(null), 1800);
@@ -63,7 +63,7 @@ const Class = () => {
         })
         .catch((error) => console.log(error));
     } else {
-      axios.post("http://localhost:3000/Create/Class", formData)
+      axios.post("https://schoolmanagement-backend-6qtd.onrender.com/Create/Class", formData)
         .then(() => {
           setShowSuccess({ type: 'create' });
           setTimeout(() => setShowSuccess(null), 1800);
@@ -76,7 +76,7 @@ const Class = () => {
 
   // Delete class
   const handleDeleteData = (id) => {
-    axios.delete(`http://localhost:3000/delete/class/${id}`)
+    axios.delete(`https://schoolmanagement-backend-6qtd.onrender.com/delete/class/${id}`)
       .then(() => {
         setShowSuccess({ type: 'delete' });
         setTimeout(() => setShowSuccess(null), 1800);
@@ -87,7 +87,7 @@ const Class = () => {
 
   // Toggle active status
   const toggleActiveStatus = (id, currentStatus) => {
-    axios.put(`http://localhost:3000/update/class/${id}`, { isActive: !currentStatus })
+    axios.put(`https://schoolmanagement-backend-6qtd.onrender.com/update/class/${id}`, { isActive: !currentStatus })
       .then(() => {
         setShowSuccess({ type: 'status' });
         setTimeout(() => setShowSuccess(null), 1800);

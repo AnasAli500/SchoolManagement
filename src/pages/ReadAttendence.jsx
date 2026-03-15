@@ -21,15 +21,15 @@ const ReadAttendence = () => {
         const fetchData = async () => {
             try {
                 // Fetch classes
-                const classesResponse = await axios.get("http://localhost:3000/read/class");
+                const classesResponse = await axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/class");
                 setClasses(classesResponse.data);
 
                 // Fetch teachers
-                const teachersResponse = await axios.get("http://localhost:3000/read/Teacher");
+                const teachersResponse = await axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Teacher");
                 setTeachers(teachersResponse.data);
 
                 // Fetch students
-                const studentsResponse = await axios.get("http://localhost:3000/read/Student");
+                const studentsResponse = await axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Student");
                 setStudents(studentsResponse.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -47,7 +47,7 @@ const ReadAttendence = () => {
 
         setLoading(true);
         try {
-            const response = await axios.get(`http://localhost:3000/read/attendance`, {
+            const response = await axios.get(`https://schoolmanagement-backend-6qtd.onrender.com/read/attendance`, {
                 params: {
                     classId: selectedClass,
                     teacherId: selectedTeacher,
@@ -216,7 +216,7 @@ const ReadAttendence = () => {
                                                     {editId === record._id ? (
                                                         <button
                                                             onClick={async () => {
-                                                                await axios.put(`http://localhost:3000/update/attendance/${record._id}`, { status: editStatus });
+                                                                await axios.put(`https://schoolmanagement-backend-6qtd.onrender.com/update/attendance/${record._id}`, { status: editStatus });
                                                                 setEditId(null);
                                                                 fetchAttendanceRecords();
                                                             }}

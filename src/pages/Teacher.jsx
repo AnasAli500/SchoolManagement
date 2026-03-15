@@ -27,7 +27,7 @@ const Teacher = () => {
 
   // Read all teachers
   const handleRaedData = () => {
-    axios.get("http://localhost:3000/read/Teacher").then((res) => {
+    axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Teacher").then((res) => {
       setData(res.data);
     }).catch(error => console.log(error));
   };
@@ -35,10 +35,10 @@ const Teacher = () => {
   // Read all classes and periods
   useEffect(() => {
     handleRaedData();
-    axios.get("http://localhost:3000/read/Class")
+    axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Class")
       .then((res) => setClasses(res.data))
       .catch((error) => console.log(error));
-    axios.get("http://localhost:3000/period")
+    axios.get("https://schoolmanagement-backend-6qtd.onrender.com/period")
       .then((res) => setPeriods(res.data))
       .catch((error) => console.log(error));
   }, []);
@@ -89,7 +89,7 @@ const Teacher = () => {
       image: formData.image
     };
     if (editId) {
-      axios.put(`http://localhost:3000/update/Teacher/${editId}`, payload)
+      axios.put(`https://schoolmanagement-backend-6qtd.onrender.com/update/Teacher/${editId}`, payload)
         .then(() => {
           setShowSuccess({ type: 'update' });
           setTimeout(() => setShowSuccess(null), 1800);
@@ -99,7 +99,7 @@ const Teacher = () => {
         })
         .catch((error) => console.log(error));
     } else {
-      axios.post("http://localhost:3000/create/Teacher", payload)
+      axios.post("https://schoolmanagement-backend-6qtd.onrender.com/create/Teacher", payload)
         .then(() => {
           setShowSuccess({ type: 'create' });
           setTimeout(() => setShowSuccess(null), 1800);
@@ -112,7 +112,7 @@ const Teacher = () => {
 
   // Delete teacher
   const handleDeleteData = (id) => {
-    axios.delete(`http://localhost:3000/delete/Teacher/${id}`)
+    axios.delete(`https://schoolmanagement-backend-6qtd.onrender.com/delete/Teacher/${id}`)
       .then(() => {
         setShowSuccess({ type: 'delete' });
         setTimeout(() => setShowSuccess(null), 1800);

@@ -32,7 +32,7 @@ const Student = () => {
 
   // Read all students
   const handleRaedData = () => {
-    axios.get("http://localhost:3000/read/Student").then((res) => {
+    axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Student").then((res) => {
       setData(res.data);
     }).catch(error => console.log(error));
   };
@@ -40,7 +40,7 @@ const Student = () => {
   // Read all classes
   useEffect(() => {
     handleRaedData();
-    axios.get('http://localhost:3000/read/class')
+    axios.get('https://schoolmanagement-backend-6qtd.onrender.com/read/class')
       .then((response) => {
         setClasses(response.data);
       })
@@ -103,7 +103,7 @@ const Student = () => {
       Age: formData.Age
     };
     if (editId) {
-      axios.put(`http://localhost:3000/update/Student/${editId}`, payload)
+      axios.put(`https://schoolmanagement-backend-6qtd.onrender.com/update/Student/${editId}`, payload)
         .then(() => {
           setShowSuccess({ type: 'update' });
           setTimeout(() => setShowSuccess(null), 1800);
@@ -113,7 +113,7 @@ const Student = () => {
         })
         .catch((error) => console.log(error));
     } else {
-      axios.post("http://localhost:3000/create/student", payload)
+      axios.post("https://schoolmanagement-backend-6qtd.onrender.com/create/student", payload)
         .then(() => {
           setShowSuccess({ type: 'create' });
           setTimeout(() => setShowSuccess(null), 1800);
@@ -126,7 +126,7 @@ const Student = () => {
 
   // Delete student
   const handleDeleteData = (id) => {
-    axios.delete(`http://localhost:3000/delete/Student/${id}`)
+    axios.delete(`https://schoolmanagement-backend-6qtd.onrender.com/delete/Student/${id}`)
       .then(() => {
         setShowSuccess({ type: 'delete' });
         setTimeout(() => setShowSuccess(null), 1800);
@@ -137,7 +137,7 @@ const Student = () => {
 
   // Toggle active status
   const toggleActiveStatus = (id, currentStatus) => {
-    axios.put(`http://localhost:3000/update/Student/${id}`, { isActive: !currentStatus })
+    axios.put(`https://schoolmanagement-backend-6qtd.onrender.com/update/Student/${id}`, { isActive: !currentStatus })
       .then(() => {
         setShowSuccess({ type: 'status' });
         setTimeout(() => setShowSuccess(null), 1800);
@@ -172,14 +172,14 @@ const Student = () => {
     setFinanceInfo(null);
     try {
       // Fetch attendance
-      const attRes = await axios.get(`http://localhost:3000/read/attendence/student/${student._id}`);
+      const attRes = await axios.get(`https://schoolmanagement-backend-6qtd.onrender.com/read/attendence/student/${student._id}`);
       setAttendanceInfo(attRes.data);
     } catch (err) {
       setAttendanceInfo({ error: 'Attendance info not found' });
     }
     try {
       // Fetch finance
-      const finRes = await axios.get(`http://localhost:3000/read/finance/student/${student._id}`);
+      const finRes = await axios.get(`https://schoolmanagement-backend-6qtd.onrender.com/read/finance/student/${student._id}`);
       setFinanceInfo(finRes.data);
     } catch (err) {
       setFinanceInfo({ error: 'Finance info not found' });

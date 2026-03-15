@@ -13,7 +13,7 @@ const Period = () => {
 
   // Read all periods
   const fetchPeriods = () => {
-    axios.get("http://localhost:3000/period").then((res) => {
+    axios.get("https://schoolmanagement-backend-6qtd.onrender.com/period").then((res) => {
       setPeriods(res.data);
     });
   };
@@ -28,7 +28,7 @@ const Period = () => {
     if (editId) {
       // Update
       axios
-        .put(`http://localhost:3000/period/${editId}`, {
+        .put(`https://schoolmanagement-backend-6qtd.onrender.com/period/${editId}`, {
           periodId,
           periodName,
         })
@@ -44,7 +44,7 @@ const Period = () => {
     } else {
       // Create
       axios
-        .post("http://localhost:3000/period", {
+        .post("https://schoolmanagement-backend-6qtd.onrender.com/period", {
           periodId,
           periodName,
         })
@@ -61,7 +61,7 @@ const Period = () => {
 
   // Delete period
   const handleDelete = (id) => {
-    axios.delete(`http://localhost:3000/period/${id}`).then(() => {
+    axios.delete(`https://schoolmanagement-backend-6qtd.onrender.com/period/${id}`).then(() => {
       setShowSuccess({ type: 'delete' });
       setTimeout(() => setShowSuccess(null), 1800);
       fetchPeriods();

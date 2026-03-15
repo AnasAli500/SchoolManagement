@@ -17,7 +17,7 @@ const FinanceRead = () => {
 
   // Read all finance records
   const handleReadData = () => {
-    axios.get("http://localhost:3000/read/Finance").then((res) => {
+    axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Finance").then((res) => {
       setFinanceData(res.data);
     }).catch(error => console.log(error));
   };
@@ -25,7 +25,7 @@ const FinanceRead = () => {
   // Read all students and classes
   useEffect(() => {
     handleReadData();
-    axios.get('http://localhost:3000/read/Student')
+    axios.get('https://schoolmanagement-backend-6qtd.onrender.com/read/Student')
       .then((response) => {
         setStudents(response.data);
       })
@@ -33,7 +33,7 @@ const FinanceRead = () => {
         console.error("Error fetching students:", error);
       });
     
-    axios.get('http://localhost:3000/read/class')
+    axios.get('https://schoolmanagement-backend-6qtd.onrender.com/read/class')
       .then((response) => {
         setClasses(response.data);
       })

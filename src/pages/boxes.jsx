@@ -12,28 +12,28 @@ const Boxes = () => {
 
     useEffect(() => {
         // Fetch student data
-        axios.get("http://localhost:3000/read/Student")
+        axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Student")
             .then((res) => {
                 setStudentCount(res.data.length)
             })
             .catch(error => console.log(error))
 
         // Fetch teacher data
-        axios.get("http://localhost:3000/read/Teacher")
+        axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Teacher")
             .then((res) => {
                 setTeacherCount(res.data.length)
             })
             .catch(error => console.log(error))
 
         // Fetch class data
-        axios.get("http://localhost:3000/read/class")
+        axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/class")
             .then((res) => {
                 setClassCount(res.data.length)
             })
             .catch(error => console.log(error))
 
         // Fetch period data
-        axios.get("http://localhost:3000/period")
+        axios.get("https://schoolmanagement-backend-6qtd.onrender.com/period")
             .then((res) => {
                 setPeriodCount(res.data.length)
             })

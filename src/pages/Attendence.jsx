@@ -17,11 +17,11 @@ const Attendence = () => {
         const fetchData = async () => {
             try {
                 // Fetch classes
-                const classesResponse = await axios.get("http://localhost:3000/read/class");
+                const classesResponse = await axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/class");
                 setClasses(classesResponse.data);
 
                 // Fetch teachers
-                const teachersResponse = await axios.get("http://localhost:3000/read/Teacher");
+                const teachersResponse = await axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Teacher");
                 setTeachers(teachersResponse.data);
             } catch (error) {
                 console.error("Error fetching data:", error);
@@ -35,7 +35,7 @@ const Attendence = () => {
         const fetchStudents = async () => {
             if (selectedClass) {
                 try {
-                    const response = await axios.get("http://localhost:3000/read/Student");
+                    const response = await axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Student");
                     // Filter students by selected class AND isActive
                     const filteredStudents = response.data.filter(
                         student => student.class?._id === selectedClass && student.isActive === true
@@ -169,7 +169,7 @@ const Attendence = () => {
                             return;
                         }
                         try {
-                            await axios.post("http://localhost:3000/create/attendance", attendanceArray);
+                            await axios.post("https://schoolmanagement-backend-6qtd.onrender.com/create/attendance", attendanceArray);
                             alert("Attendance saved!");
                         } catch (error) {
                             alert("Error saving attendance");

@@ -29,7 +29,7 @@ const Finance = () => {
 
   // Read all finance records
   const handleReadData = () => {
-    axios.get("http://localhost:3000/read/Finance").then((res) => {
+    axios.get("https://schoolmanagement-backend-6qtd.onrender.com/read/Finance").then((res) => {
       setData(res.data);
     }).catch(error => console.log(error));
   };
@@ -37,7 +37,7 @@ const Finance = () => {
   // Read all classes and students
   useEffect(() => {
     handleReadData();
-    axios.get('http://localhost:3000/read/class')
+    axios.get('https://schoolmanagement-backend-6qtd.onrender.com/read/class')
       .then((response) => {
         setClasses(response.data);
       })
@@ -45,7 +45,7 @@ const Finance = () => {
         console.error("Error fetching classes:", error);
       });
     
-    axios.get('http://localhost:3000/read/Student')
+    axios.get('https://schoolmanagement-backend-6qtd.onrender.com/read/Student')
       .then((response) => {
         setStudents(response.data);
       })
@@ -129,7 +129,7 @@ const Finance = () => {
     };
     
     if (editId) {
-      axios.put(`http://localhost:3000/update/Finance/${editId}`, payload)
+      axios.put(`https://schoolmanagement-backend-6qtd.onrender.com/update/Finance/${editId}`, payload)
         .then(() => {
           setShowSuccess({ type: 'update' });
           setTimeout(() => setShowSuccess(null), 1800);
@@ -139,7 +139,7 @@ const Finance = () => {
         })
         .catch((error) => console.log(error));
     } else {
-      axios.post("http://localhost:3000/create/Finance", payload)
+      axios.post("https://schoolmanagement-backend-6qtd.onrender.com/create/Finance", payload)
         .then(() => {
           setShowSuccess({ type: 'create' });
           setTimeout(() => setShowSuccess(null), 1800);
@@ -152,7 +152,7 @@ const Finance = () => {
 
   // Delete finance record
   const handleDeleteData = (id) => {
-    axios.delete(`http://localhost:3000/delete/Finance/${id}`)
+    axios.delete(`https://schoolmanagement-backend-6qtd.onrender.com/delete/Finance/${id}`)
       .then(() => {
         setShowSuccess({ type: 'delete' });
         setTimeout(() => setShowSuccess(null), 1800);
@@ -168,7 +168,7 @@ const Finance = () => {
       updateData.paymentDate = new Date().toISOString();
     }
     
-    axios.put(`http://localhost:3000/update/Finance/${id}`, updateData)
+    axios.put(`https://schoolmanagement-backend-6qtd.onrender.com/update/Finance/${id}`, updateData)
       .then(() => {
         setShowSuccess({ type: 'status' });
         setTimeout(() => setShowSuccess(null), 1800);
