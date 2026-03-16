@@ -48,7 +48,7 @@ const Login = () => {
             } else {
                 localStorage.setItem('isAuthenticated', 'true');
                 localStorage.setItem('userEmail', Email);
-                setNotification({ message: " Customer login successfully", type: "success" });
+                setNotification({ message: " Admin login successfully", type: "success" });
                 setTimeout(() => navigate("/boxes"), 1000);
             }
         }).catch((err) => {
