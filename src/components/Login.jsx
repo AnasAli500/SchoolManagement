@@ -4,8 +4,9 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [Email, setEmail] = useState("");
-    const [password, setpassword] = useState("");
+    const [password, setPassword] = useState("");
     const [notification, setNotification] = useState({ message: "", type: "" }); // type: 'error' | 'success'
+    const [errors, setErrors] = useState({ Email: false, password: false }); // validation errors
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -28,16 +29,26 @@ const Login = () => {
     const handleLogin = (e) => {
         e.preventDefault(); 
         setNotification({ message: "", type: "" });
+
+        // Check for empty fields
+        const newErrors = {
+            Email: Email.trim() === "",
+            password: password.trim() === ""
+        };
+        setErrors(newErrors);
+
+        if (newErrors.Email || newErrors.password) return; // stop if any field is empty
+
         axios.post("https://schoolmanagement-backend-6qtd.onrender.com/create/Login", {
             Email,
             password
         }).then((res) => {
             if (res.data.error) {
-                setNotification({ message: "❌ Invalid Email or Password", type: "error" });
+                setNotification({ message: " Invalid Email or Password", type: "error" });
             } else {
                 localStorage.setItem('isAuthenticated', 'true');
                 localStorage.setItem('userEmail', Email);
-                setNotification({ message: "✅ Customer login successfully", type: "success" });
+                setNotification({ message: " Customer login successfully", type: "success" });
                 setTimeout(() => navigate("/boxes"), 1000);
             }
         }).catch((err) => {
@@ -70,25 +81,25 @@ const Login = () => {
                     <div className="space-y-1">
                         <label className="block text-sm font-medium text-gray-300">Email</label>
                         <input 
-                            required
                             type="email"
                             value={Email} 
                             onChange={(e) => setEmail(e.target.value)} 
-                            className="w-full px-3 py-2 rounded-lg border border-[#00bcd4]/30 bg-[#0f0f23]/50 text-white focus:outline-none focus:ring-2 focus:ring-[#00bcd4] focus:border-transparent transition duration-200" 
+                            className={`w-full px-3 py-2 rounded-lg border ${errors.Email ? 'border-red-500' : 'border-[#00bcd4]/30'} bg-[#0f0f23]/50 text-white focus:outline-none focus:ring-2 focus:ring-[#00bcd4] focus:border-transparent transition duration-200`} 
                             placeholder="Enter your email"
                         />
+                        {errors.Email && <p className="text-red-500 text-sm mt-1">Email is required</p>}
                     </div>
                     
                     <div className="space-y-1">
                         <label className="block text-sm font-medium text-gray-300">Password</label>
                         <input 
-                            required
                             type="password"  
                             value={password} 
-                            onChange={(e) => setpassword(e.target.value)}  
-                            className="w-full px-3 py-2 rounded-lg border border-[#00bcd4]/30 bg-[#0f0f23]/50 text-white focus:outline-none focus:ring-2 focus:ring-[#00bcd4] focus:border-transparent transition duration-200" 
+                            onChange={(e) => setPassword(e.target.value)}  
+                            className={`w-full px-3 py-2 rounded-lg border ${errors.password ? 'border-red-500' : 'border-[#00bcd4]/30'} bg-[#0f0f23]/50 text-white focus:outline-none focus:ring-2 focus:ring-[#00bcd4] focus:border-transparent transition duration-200`} 
                             placeholder="Enter your password"
                         />
+                        {errors.password && <p className="text-red-500 text-sm mt-1">Password is required</p>}
                     </div>
 
                     <button 
@@ -97,6 +108,16 @@ const Login = () => {
                     >
                         Sign In
                     </button>
+
+                    <div className="text-center mt-4">
+                        <p className="text-sm text-gray-400">
+                            Don't have an account?{' '}
+                            {/* <Link to="/Register" className="text-[#00bcd4] hover:text-[#0097a7] font-medium transition duration-200">
+                                Sign Up
+                            </Link> */}
+                        </p>
+                    </div>
+                    
                 </form>
             </div>
         </div>
