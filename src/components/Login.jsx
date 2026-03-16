@@ -5,10 +5,9 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
     const [Email, setEmail] = useState("");
     const [password, setpassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState(""); // New state for error
+    const [notification, setNotification] = useState({ message: "", type: "" }); // type: 'error' | 'success'
     const navigate = useNavigate();
 
-    // Check if user is already logged in
     useEffect(() => {
         const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
         if (isAuthenticated) {
@@ -18,30 +17,23 @@ const Login = () => {
 
     const handleLogin = (e) => {
         e.preventDefault(); 
-        setErrorMessage(""); // Reset error on new attempt
+        setNotification({ message: "", type: "" }); // Reset notification
         axios.post("https://schoolmanagement-backend-6qtd.onrender.com/create/Login", {
             "Email": Email,
             "password": password
         }).then((res) => {
             if (res.data.error) {
-                setErrorMessage("❌ Incorrect Email or Password"); // Show error in red
+                setNotification({ message: "❌ Incorrect Email or Password", type: "error" });
             } else {
-                // Store authentication state
                 localStorage.setItem('isAuthenticated', 'true');
                 localStorage.setItem('userEmail', Email);
-                alert("✅ Login Successful");
-                navigate("/boxes");
+                setNotification({ message: "✅ Login Successful", type: "success" });
+                setTimeout(() => navigate("/boxes"), 1000); // Navigate after 1s
             }
         }).catch((err) => {
             console.error(err);
-            setErrorMessage("❌ Login failed. Please try again."); // Show network or other errors
+            setNotification({ message: "❌ Login failed. Please try again.", type: "error" });
         });
-    };
-
-    const handleLogout = () => {
-        localStorage.removeItem('isAuthenticated');
-        localStorage.removeItem('userEmail');
-        navigate('/');
     };
 
     return (
@@ -77,20 +69,28 @@ const Login = () => {
                         />
                     </div>
 
-                    {/* Error message */}
-                    {errorMessage && (
-                        <div className="bg-red-600/80 text-white p-2 rounded text-center text-sm animate-pulse">
-                            {errorMessage}
+                    {/* Notification Box */}
+                    {notification.message && (
+                        <div
+                            className={`p-2 rounded text-center text-sm font-medium ${
+                                notification.type === "error"
+                                    ? "bg-red-600/80 text-white animate-pulse"
+                                    : "bg-green-600/80 text-white animate-pulse"
+                            }`}
+                        >
+                            {notification.message}
                         </div>
                     )}
 
                     <button 
                         onClick={handleLogin} 
                         className={`w-full px-4 py-2 rounded-lg text-white text-base font-semibold mt-4 transition duration-200 transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-offset-2
-                            ${errorMessage ? 'bg-red-500 hover:bg-red-600 focus:ring-red-500' : 'bg-gradient-to-r from-[#00bcd4] to-[#0097a7] hover:opacity-90 focus:ring-[#00bcd4]'}
+                            ${notification.type === "error" 
+                                ? 'bg-red-500 hover:bg-red-600 focus:ring-red-500' 
+                                : 'bg-gradient-to-r from-[#00bcd4] to-[#0097a7] hover:opacity-90 focus:ring-[#00bcd4]'}
                         `}
                     >
-                        {errorMessage ? 'Login Failed' : 'Sign In'}
+                        {notification.type === "error" ? 'Login Failed' : 'Sign In'}
                     </button>
                 </form>
             </div>
