@@ -106,7 +106,7 @@ const Login = () => {
                         onClick={handleLogin} 
                         className="w-full px-4 py-2 rounded-lg text-white text-base font-semibold mt-4 bg-gradient-to-r from-[#00bcd4] to-[#0097a7] hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-[#00bcd4] transition duration-200 transform hover:scale-[1.02]"
                     >
-                        Sign In
+                        login In
                     </button>
 
                     <div className="text-center mt-4">
